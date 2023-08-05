@@ -30,7 +30,8 @@ async function run() {
     });
 
     app.get("/notes", async (req, res) => {
-      const query = {};
+      const email = req.query.email;
+      const query = { email: email };
       const notes = await noteCollection.find(query).toArray();
       res.send(notes);
     });
