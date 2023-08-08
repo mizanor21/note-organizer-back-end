@@ -30,15 +30,20 @@ async function run() {
     });
 
     app.get("/notes", async (req, res) => {
+      // const search = req.query.search;
       const email = req.query.email;
-      const query = { email: email };
+      const query = {
+        email: email,
+        // $text: {
+        //   $search: search,
+        // },
+      };
       const notes = await noteCollection.find(query).toArray();
       res.send(notes);
     });
 
     app.post("/notes", async (req, res) => {
       const note = req.body;
-      console.log(note);
       const result = await noteCollection.insertOne(note);
       res.send(result);
     });
