@@ -57,7 +57,6 @@ async function run() {
         );
 
         res.send(result);
-        console.log(updatedNote);
       } catch (error) {
         console.error(error);
         res.status(500).send("An error occurred while updating the note.");
