@@ -2,7 +2,7 @@ const { MongoClient, ServerApiVersion, ObjectId } = require("mongodb");
 const express = require("express");
 const cors = require("cors");
 const app = express();
-const port = 5000;
+const port = process.env.PORT || 5000;
 
 app.use(cors());
 app.use(express.json());
@@ -74,11 +74,10 @@ async function run() {
       const result = await noteCollection.deleteOne(query);
       res.send(result);
     });
+    app.listen(port, () => {
+      console.log(`Server is running on ${port}`);
+    });
   } finally {
   }
 }
 run().catch(console.dir);
-
-app.listen(port, () => {
-  console.log(`Server is running on ${port}`);
-});
